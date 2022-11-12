@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario para agregar películas</title>
+</head>
+<body>
+    <h1>Agregar Película</h1>
+    <form action="/api/peliculas" method="POST">
+        <label for="titulo">Título:</label>
+        <input type="text" name="titulo" required>
+
+        <label for="price">Precio:</label>
+        <input type="text" name="precio" required>
+
+        <label for="thumbnail">Thumbnail:</label>
+        <input type="text" name="thumbnail" required>
+        
+        <button type="submit">Agregar pelicula a la lista</button>
+    </form>
+</body>
+</html>
