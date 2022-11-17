@@ -93,7 +93,7 @@ class Archivo {
                     const {titulo, precio, thumbnail} = nuevaPeli;
             
                     peliculasConId[index]['titulo'] = titulo;
-                    peliculasConId[index]['prontopromocion'] = precio;
+                    peliculasConId[index]['precio'] = precio;
                     peliculasConId[index]['thumbnail'] = thumbnail;
                     await fs.promises.writeFile(this.filepath, JSON.stringify(peliculasConId));
                     return true;
