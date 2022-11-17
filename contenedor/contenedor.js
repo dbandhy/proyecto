@@ -1,5 +1,6 @@
 const fs = require("fs");
 
+
 class Archivo {
     constructor() {
         this.filepath = './peliculas.txt'
@@ -40,18 +41,20 @@ class Archivo {
     }
 
     async getById(id) {
-
+        id = Number(id);
         try {
         
-        let peliculasGuardados = await fs.promises.readFile(this.filepath,"utf-8")
+        const peliculasGuardados = await fs.promises.readFile(this.filepath,"utf-8")
         const arrayDePeliculas = JSON.parse(peliculasGuardados);
-        let peliFound = arrayDePeliculas.find((ele) =>
-                ele.id === id ? ele : undefined
+        //let peliFound =
+        return  arrayDePeliculas.find((ele) =>
+                ele.id === id)
+        //          ? ele : undefined
         
-        );
+        // );
          //await fs.promises.writeFile(this.filepath, JSON.stringify(peliFound))
         
-        console.log(peliFound);
+        //console.log(peliFound);
         } catch (error) {
         
         console.log(error);
