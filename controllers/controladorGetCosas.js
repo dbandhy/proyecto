@@ -1,8 +1,8 @@
-const { randomUUID } = require("crypto");
+//const { randomUUID } = require("crypto");
 const { Archivo } = require ("../contenedor/contenedor")
-const archivo =  new Archivo("peliculas.txt")
+const archivo =  new Archivo("peliculas.json")
 
-peli = []
+
 //DESAFIO
 //Get
  async function controladorGetPelis (req, res) {
@@ -19,10 +19,8 @@ async function controladorPostPelis(req, res) {
     // res.status(200).send(`Producto agregado con el ID: ${nuevaPelicula}`)
     
     nuevaPeli = req.body;
-    nuevaPeli.id = randomUUID();
-    //peli.push(nuevaPeli)
+    //nuevaPeli.id = randomUUID();
     archivo.guardar(nuevaPeli);
-    res.status(201);
     res.json(nuevaPeli);
 }
 
@@ -60,11 +58,12 @@ exports.controladorPutPelisSegunId = controladorPutPelisSegunId;
 
 
 async function controladorDeletePelisSegunId({ params: { id } }, res) {
-    const eliminarPeli = await archivo.getById(id);
+    //id = Number(id)
+    const eliminarPeli = await archivo.deleteById(id);
     if (!eliminarPeli == -1) {
-        res.status(404).send(`Se borró el ID: ${id}`);
+        res.status(404).send(`]No Se borró el ID: ${id}`);
     } else {
-        res.status(200).send(`No se borró el ID: ${id}`)
+        res.status(200).send(`Se e borró el ID: ${id}`)
     }
 }
 

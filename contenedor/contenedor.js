@@ -1,5 +1,5 @@
 const fs = require("fs");
-
+//const { randomUUID } = require("crypto");
 
 class Archivo {
     constructor() {
@@ -29,7 +29,7 @@ class Archivo {
                 titulo,
                 precio,
                 thumbnail,
-                // id: peliculas.length + 1,
+                id: peliculas.length + 1,
             };
             peliculas.push(nuevaPelicula);
             await fs.promises.writeFile(this.filepath, JSON.stringify(peliculas, null, 2));
@@ -47,9 +47,8 @@ class Archivo {
         const peliculasGuardados = await fs.promises.readFile(this.filepath,"utf-8")
         const arrayDePeliculas = JSON.parse(peliculasGuardados);
         //let peliFound =
-        return  arrayDePeliculas.find((ele) =>
-                ele.id === id)
-        //          ? ele : undefined
+        return  arrayDePeliculas.find((peli) =>
+                peli.id === id) //? peli : undefined
         
         // );
          //await fs.promises.writeFile(this.filepath, JSON.stringify(peliFound))
@@ -65,7 +64,7 @@ class Archivo {
         async deleteById(id) {
             //await fs.promises.unlink(this.filepath)
             try{
-
+            id = Number(id)
               let peliculasCompletas = await fs.promises.readFile(this.filepath, "utf-8")
               let peliculaConId = JSON.parse(peliculasCompletas);
             
@@ -80,6 +79,33 @@ class Archivo {
             }
             
             }
+
+            async updateById(id, nuevaPeli) {
+                try {
+                  id = Number(id);
+                  const peliculasCompletas = await fs.promises.readFile(this.filepath,"utf-8");
+                  const peliculasConId = JSON.parse(peliculasCompletas);
+                  const peliculaActualizar = peliculasConId.find(
+                    (peli) => peli.id === id
+                  );
+                  if (peliculaActualizar) {
+                    const index = peliculasConId.indexOf(peliculaActualizar);
+                    const {titulo, precio, thumbnail} = nuevaPeli;
+            
+                    peliculasConId[index]['titulo'] = titulo;
+                    peliculasConId[index]['prontopromocion'] = precio;
+                    peliculasConId[index]['thumbnail'] = thumbnail;
+                    await fs.promises.writeFile(this.filepath, JSON.stringify(peliculasConId));
+                    return true;
+                  } else {
+                    console.log(`ID ${id} no existe`);
+                    return null;
+                  }
+            
+                } catch (error) {
+                  `Error: ${error.code} | No reconoce (${id})`
+                }
+              }
     
 }
 
