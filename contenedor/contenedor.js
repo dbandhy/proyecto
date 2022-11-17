@@ -28,7 +28,7 @@ class Archivo {
                 titulo,
                 precio,
                 thumbnail,
-                id: peliculas.length + 1,
+                // id: peliculas.length + 1,
             };
             peliculas.push(nuevaPelicula);
             await fs.promises.writeFile(this.filepath, JSON.stringify(peliculas, null, 2));

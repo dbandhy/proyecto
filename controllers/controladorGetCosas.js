@@ -1,8 +1,8 @@
-//const { randomUUID } = require("crypto");
+const { randomUUID } = require("crypto");
 const { Archivo } = require ("../contenedor/contenedor")
-const archivo =  new Archivo("peliculas.json")
+const archivo =  new Archivo("peliculas.txt")
 
-
+peli = []
 //DESAFIO
 //Get
  async function controladorGetPelis (req, res) {
@@ -14,15 +14,16 @@ exports.controladorGetPelis = controladorGetPelis;
 //controladorPost envía cosas
 
 async function controladorPostPelis(req, res) {
-    const { body } = req
-    const nuevaPelicula = await archivo.guardar(body)
-    res.status(200).send(`Producto agregado con el ID: ${nuevaPelicula}`)
+    // const { body } = req
+    // const nuevaPelicula = await archivo.guardar(body)
+    // res.status(200).send(`Producto agregado con el ID: ${nuevaPelicula}`)
     
-    // nuevaPeli = req.body;
-    // nuevaPeli.id = randomUUID();
-    // pelis.push(nuevaPeli);
-    // res.status(201);
-    // res.json(nuevaPeli);
+    nuevaPeli = req.body;
+    nuevaPeli.id = randomUUID();
+    //peli.push(nuevaPeli)
+    archivo.guardar(nuevaPeli);
+    res.status(201);
+    res.json(nuevaPeli);
 }
 
 
@@ -33,9 +34,9 @@ async function controladorGetPelisSegunId({ params: { id } }, res) {
     const buscarPorId = await archivo.getById(id);
     if (!buscarPorId) {
         res.status(404);
-        res.json({ message: `No se encontró pelicula con ese (${id})` });
+        res.send({ message: `No se encontró pelicula con ese (${id})` });
     } else {
-        res.json(buscarPorId);
+        res.send(buscarPorId);
     }
 }
 
