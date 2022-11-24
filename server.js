@@ -10,7 +10,7 @@ const io = new Socket(httpServer)
 const router = express.Router();
 
 
-//const { engine } = require('express-handlebars')
+const { engine } = require('express-handlebars')
 
 const { routerWeb } = require("./routers/routerWeb.js")
 const { routerApi } = require("./routers/routerApi.js")
@@ -21,6 +21,16 @@ const { routerApi } = require("./routers/routerApi.js")
 
 
 app.use(express.static('views'));
+app.set('views', './views');
+app.set('view engine', 'hbs');
+
+app.engine('hbs', engine({
+   extname: '.hbs',
+   defaultLayout: 'index.hbs',
+   layoutsDir: __dirname + '/views/layouts',
+   partialsDir: __dirname + '/views/partials'
+}))
+
 
 app.get('/', () => {
    res.send("OK")
