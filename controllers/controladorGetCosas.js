@@ -45,10 +45,10 @@ async function controladorPutPelisSegunId( req , res) {
     const {id} = req.params;
     const { body } = req;
     const ActualizarId = await archivo.updateById(id,body);
-    if (!ActualizarId) {
-    res.status(200).send(`LA película de ID: ${id} fue actualizada`);
+    if (ActualizarId) {
+    res.status(200).json(`LA película de ID: ${id} fue actualizada`);
         } else {
-        res.status(404).send((`No se encontró el ID: ${id}`));
+        res.status(404).json((`No se encontró el ID: ${id}`));
     }
 
     

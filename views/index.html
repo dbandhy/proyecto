@@ -5,10 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario para agregar películas</title>
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <h1>Agregar Película</h1>
+
+    <h1>WEb Socket</h1>
+
+    <form id="formAgregarPersona"></form>
+    <input id="inputAutor" type="text" placeholder="pelicula"><br>
+    <input id="inputPedido" type="text" placeholder="precio"><br>
+    <button id="botonEnviar">Enviar</button>
+    <div id="listaMensajes"></div>
+    <script src="js/index.js"></script>
+
+    <!-- <button id="botonSaludar">saludar</button> -->
+    <!-- <script src="js/index.js"> </script> -->
+    <!-- <h1>Agregar Película</h1>
     <form action="/api/peliculas" method="POST">
         <label for="titulo">Título:</label>
         <input type="text" name="titulo" required>
@@ -20,7 +32,7 @@
         <input type="text" name="thumbnail" required>
         
         <button type="submit">Agregar pelicula a la lista</button>
-    </form>
+    </form> -->
 
     <!-- <h1>Agregar Película</h1>
     <form action="/imagenes" method="POST" enctype="multipart/form-data">
