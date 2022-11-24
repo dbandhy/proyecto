@@ -36,6 +36,17 @@ app.get('/', () => {
    res.send("OK")
 })
 
+app.get('/peliculas', async(req, res) => {
+   const productos = await contenedor.leer();
+   res.render('pages/list', {peliculas})
+})
+
+app.post('/peliculas', async(req,res) => {
+   const {body} = req;
+   await contenedor.guardar(body);
+   res.redirect('/');
+})
+
 //const mensajes = []
 
 const personas = []
