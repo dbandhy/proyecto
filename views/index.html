@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,18 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario para agregar películas</title>
+    <script src="js/index.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    
 </head>
 <body>
 
-    <h1>WEb Socket</h1>
+    <!-- <h1>WEb Socket</h1>
 
     <form id="formAgregarPersona"></form>
     <input id="inputAutor" type="text" placeholder="pelicula"><br>
     <input id="inputPedido" type="text" placeholder="precio"><br>
     <button id="botonEnviar">Enviar</button>
-    <div id="listaMensajes"></div>
-    <script src="js/index.js"></script>
+    <div id="listaPeliculas"></div> -->
+    
 
     <!-- <button id="botonSaludar">saludar</button> -->
     <!-- <script src="js/index.js"> </script> -->
@@ -42,5 +46,82 @@
 
         <button type="submit">Agregar poster de película</button>
     </form> -->
+    <h2>Agregar Pelicula</h2>
+    <div class="row g-3">
+    
+        <form class="row g-3" action="/peliculas" method="POST"> 
+        
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon1">Título</span>
+                    <input id="input-title" type="text" name="title" required class="form-control" placeholder="Título del producto" aria-label="Título" aria-describedby="basic-addon1">
+                </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon2">Precio</span>
+                    <input id="input-price" type="text" name="price" required class="form-control" placeholder="Precio unitario" aria-label="Precio" aria-describedby="basic-addon1">
+                </div>
+            </div>
+    
+            <div class="col-sm-3">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon3">Thumbnail</span>
+                    <input id="input-img" type="text" name="thumbnail" required class="form-control" placeholder="Thumbnail (URL)" aria-label="Thumbnail" aria-describedby="basic-addon1">
+                </div>
+            </div>
+    
+            <div class="col-sm-2">
+                <div class="d-grid gap-2">
+                    <button id="btn-submit" class="btn btn-primary btn-sm" type="submit">Agregar a la lista</button>
+                </div>
+            </div>
+            
+            <hr>
+            <span>Chatea con otros usuarios</span>
+            
+            <div >
+                <div>
+                    <span class="input-group-text" id="basic-addon3">Email</span>
+                    <input id="input-email" type="text" name="thumbnail" required class="form-control" placeholder="Ingresa tu email" aria-label="text">
+                </div>
+            </div>
+    
+            <div class="col-sm-5">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="basic-addon3">Mensaje</span>
+                    <input id="input-mensaje" type="text" name="thumbnail" required class="form-control" placeholder="Ingresá tu mensaje" aria-label="mensaje" aria-describedby="basic-addon1">
+                </div>
+            </div>
+    
+    
+            <div class="col-sm-2">
+                <div class="d-grid gap-2">
+                    <button id="btn-submit-mensaje" class="btn btn-success btn-sm">Enviar mensaje</button>
+                </div>
+            </div>
+            <div id="historial-mensajes">
+            <span>Historial de mensajes</span>
+            </div>
+            </div>
+            
+            <hr>
+            
+            <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Imagen</th>
+                </tr>
+            </thead>
+
+        </table>
+    
+
+</form>
+</div>
 </body>
 </html>

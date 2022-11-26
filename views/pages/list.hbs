@@ -1,17 +1,17 @@
-<h2>Lista de productos</h2>
-{{#if productos.[0]}}
+<h2>Lista de peliculas</h2>
+{{#if peliculas.[0]}}
     <table class="table table-sm table-hover">
-        <caption>Lista total de productos</caption>
+        <caption>Lista total de peliculas</caption>
         <thead>
             <tr>
                 <th scope="col">#ID</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Precio</th>
+                <th scope="col">pelicula</th>
                 <th scope="col">Imagen</th>
             </tr>
         </thead>
         <tbody>
-        {{#each productos}}
+        {{#each peliculas}}
             <tr>
                 <td>{{this.id}}</td>
                 <td>{{this.title}}</td>
@@ -22,5 +22,5 @@
         </tbody>
     </table>
 {{else}}
-<h2>No hay productos en la lista</h2>
+<h2>No hay peliculas en la lista</h2>
 {{/if}}
