@@ -75,9 +75,9 @@ io.on('connection', async(socket) => {
 
    socket.on('productoAgregado', async(data) => {
        console.log('Alguien presionó el click')
-       await archivo.guardar(data);
+       await contenedor.guardar(data);
        
-       const productos = await archivo.leer();
+       const peliculas = await contenedor.leer();
        io.sockets.emit('listaActualizada', peliculas);
    })
    
