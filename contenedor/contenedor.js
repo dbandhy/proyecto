@@ -2,8 +2,8 @@ const fs = require("fs");
 //const { randomUUID } = require("crypto");
 
 class Archivo {
-    constructor() {
-        this.filepath = './peliculas.txt'
+    constructor(data) {
+        this.filepath = data
     }
 
     async leer () {

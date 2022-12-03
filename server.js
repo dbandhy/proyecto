@@ -132,9 +132,23 @@ app.post('/peliculas', async(req,res) => {
    await contenedor.guardar(body);
    res.redirect('/');
 })
+
+app.get('/chat', async(req, res) => {
+   const chat = await contenedor.leer();
+   res.render('pages/list', {chat})
+})
+app.post('/chat', async(req, res) => {
+   const {body} = req;
+   await contenedor.guardar(body);
+   res.redirect('/');
+})
+
+
+
 app.get('/', (req,res) => {
    res.render('pages/form', {})
 })
+
 
 
  //LISTEN
