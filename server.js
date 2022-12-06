@@ -9,8 +9,6 @@ const app = express()
 const httpServer = new HttpServer(app);
 const io = new Socket(httpServer)
 
-
-
 const router = express.Router();
 
 const { engine } = require('express-handlebars')
@@ -34,26 +32,6 @@ app.engine('hbs', engine({
    partialsDir: __dirname + '/views/partials'
 }))
 
-
-// app.get('/', () => {
-//    res.send("OK")
-// })
-
-
-const mensajes = []
-
-// const personas = []
-// //PARECIDO A MANEJAR EVENTOS
-// io.on('connection', (socket) => {
-
-//    socket.emit('personas', personas)
-
-//    socket.on('update', persona => {
-//       persona.fecha = new Date().toLocaleString()
-//       personas.push(persona)
-//       io.sockets.emit('personas', personas)
-//    })
-// })
 
 // const chatParseado= JSON.parse(fs.readFileSync("chatMensajes.txt"))
 io.on('connection', async(socket) => {
@@ -84,6 +62,8 @@ io.on('connection', async(socket) => {
        console.log('🔴 Usuario desconectado')
    })
 
+
+   //SEGUNDO FORMULARIO
    socket.emit("messages",'chatMensajes.txt')
    socket.on("new_message", async(mensaje) =>{   
        chatParseado.push(mensaje);
@@ -101,65 +81,80 @@ app.use(express.urlencoded({ extended:true }))
 
 app.use("/public", express.static("public"))
 
+// app.get('/peliculas', async(req, res) => {
+//    const traerProductos = async () => {
+//       try{
+//           const data = await contenedor.leer()
+//           res.render('pages/list', {data}) 
+          
+          
+//       }catch(error){
+//           throw new Error(error)
+//       }
+//   };
+//   traerProductos()
+// })
+   
+// app.post('/peliculas', async(req, res) => {
+//    const agregarProducto = async() => {
+//       try{
+//           const objetoNuevo = req.body
+//           console.log(objetoNuevo)
+//           await contenedor.guardar(objetoNuevo)
+//           res.redirect("/") 
+//       }catch(error){
+//           throw new Error(error)
+//       }
+//   }
+//   agregarProducto()
+// })
 
+
+// app.get('/', (req,res) => {
+//    const traerProductos = async () => {
+//       try{
+//           const data = await contenedor.leer()
+//           res.render('pages/form', {data:data}) 
+          
+          
+//       }catch(error){
+//           throw new Error(error)
+//       }
+//   };
+//   traerProductos()
+
+// })
+
+// app.get('/chat', async(req, res) => {
+//    const traerChat = async () => {
+//       try{
+//           const data = await chat.leer()
+//           res.render('pages/form', {data:data}) 
+          
+          
+//       }catch(error){
+//           throw new Error(error)
+//       }
+//   };
+//   traerChat()
+// })
 
 app.get('/peliculas', async(req, res) => {
-   const traerProductos = async () => {
-      try{
-          const data = await contenedor.leer()
-          res.render('pages/list', {data:data}) 
-          
-          
-      }catch(error){
-          throw new Error(error)
-      }
-  };
-  traerProductos()
-})
-   
-app.post('/peliculas', async(req, res) => {
-   const agregarProducto = async() => {
-      try{
-          const objetoNuevo = req.body
-          console.log(objetoNuevo)
-          await contenedor.guardar(objetoNuevo)
-          res.redirect("/") 
-      }catch(error){
-          throw new Error(error)
-      }
-  }
-  agregarProducto()
+   const peliculas = await contenedor.leer();
+   res.render('pages/list', {peliculas})
 })
 
+app.post('/peliculas', async(req,res) => {
+   const {body} = req;
+   await contenedor.guardar(body);
+   res.redirect('/');
+})
 
 app.get('/', (req,res) => {
-   const traerProductos = async () => {
-      try{
-          const data = await contenedor.leer()
-          res.render('pages/form', {data:data}) 
-          
-          
-      }catch(error){
-          throw new Error(error)
-      }
-  };
-  traerProductos()
-
+   res.render('pages/form', {})
 })
 
-app.get('/chat', async(req, res) => {
-   const traerChat = async () => {
-      try{
-          const data = await chat.leer()
-          res.render('pages/form', {data:data}) 
-          
-          
-      }catch(error){
-          throw new Error(error)
-      }
-  };
-  traerChat()
-})
+
 
 
  //LISTEN
