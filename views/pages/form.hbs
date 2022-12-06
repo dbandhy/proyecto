@@ -1,58 +1,58 @@
 
 <h2>Agregar Producto</h2>
-<div class="row g-3">
+<div>
 
-    <form class="row g-3" action="/peliculas" method="POST"> 
+    <form action="/peliculas" method="POST"> 
     
-        <div class="col-sm-3">
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="basic-addon1">Título</span>
+        <div>
+            
+                <span>Título</span>
                 <input id="input-title" type="text" name="title" required class="form-control" placeholder="Título de la pelicula" aria-label="Título" aria-describedby="basic-addon1">
-            </div>
+            
         </div>
 
-        <div class="col-sm-2">
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="basic-addon2">Precio</span>
+        
+            <div>
+                <span>Precio</span>
                 <input id="input-price" type="text" name="price" required class="form-control" placeholder="Precio unitario" aria-label="Precio" aria-describedby="basic-addon1">
             </div>
-        </div>
+        
 
         <div class="col-sm-3">
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="basic-addon3">Thumbnail</span>
+            <div>
+                <span>Thumbnail</span>
                 <input id="input-img" type="text" name="thumbnail" required class="form-control" placeholder="Thumbnail (URL)" aria-label="Thumbnail" aria-describedby="basic-addon1">
             </div>
         </div>
 
-        <div class="col-sm-2">
-            <div class="d-grid gap-2">
-                <button id="btn-submit" class="btn btn-primary btn-sm" type="submit">Agregar a la lista</button>
+        <div>
+            <div >
+                <button id="btn-submit"  type="submit">Agregar a la lista</button>
             </div>
         </div>
         
         <hr>
         <span>Chatea con otros cinéfilos</span>
     </form>
-     <form class="row g-3" action="/chat" method="POST">    
-        <div class="col-sm-3">
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="basic-addon3">Email</span>
-                <input id="input-email" type="text" name="email" required class="form-control" placeholder="Ingresá tu email" aria-label="email" aria-describedby="basic-addon1">
+     <form action="/chat" method="POST">    
+        <div>
+            <div >
+                <span>Email</span>
+                <input id="input-email" type="text" name="email" required>
             </div>
         </div>
 
-        <div class="col-sm-5">
-            <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text" id="basic-addon3">Mensaje</span>
-                <input id="input-mensaje" type="text" name="mensaje" required class="form-control" placeholder="Ingresa tu mensaje" aria-label="mensaje" aria-describedby="basic-addon1">
+        <div>
+            <div >
+                <span>Mensaje</span>
+                <input id="input-mensaje" type="text" name="mensaje" required class="form-control" placeholder="Ingresa tu mensaje" aria-label="mensaje" >
             </div>
         </div>
 
 
         <div class="col-sm-2">
             <div class="d-grid gap-2">
-                <button id="btn-submit-mensaje" class="btn btn-success btn-sm">Enviar mensaje</button>
+                <button id="btn-submit-mensaje" >Enviar mensaje</button>
             </div>
         </div>
         
@@ -64,7 +64,7 @@
         
         <hr>
         
-        <table class="table table-sm table-hover">
+        <table>
         <thead>
             <tr>
                 <th scope="col">#ID</th>
@@ -183,4 +183,15 @@
     </script>
 
     </form>
+
+    
 </div>
+
+    <div>
+        <h1>CENTRO DE MENSAJES</h1><br>
+        <input type="text" id="email"placeholder="diego_d@hotmail.com">
+        <hr>
+        <div id="chat"></div>    
+        <input type="text" id="mensaje"placeholder="Escriba su mensaje">
+        <button id="enviar">ENVIAR</button>
+    </div>

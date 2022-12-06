@@ -4,7 +4,7 @@ const express = require('express');
 const { Server: HttpServer } = require('http');
 const { Server: Socket } = require('socket.io')
 const { Archivo } = require('./contenedor/contenedor.js')
-
+const fs = require('fs')
 const app = express()
 const httpServer = new HttpServer(app);
 const io = new Socket(httpServer)
@@ -55,6 +55,7 @@ const mensajes = []
 //    })
 // })
 
+// const chatParseado= JSON.parse(fs.readFileSync("chatMensajes.txt"))
 io.on('connection', async(socket) => {
    console.log('🟢 Usuario conectado')
    
@@ -82,8 +83,17 @@ io.on('connection', async(socket) => {
    socket.on('disconnect', () => {
        console.log('🔴 Usuario desconectado')
    })
-   
+
+   socket.emit("messages",'chatMensajes.txt')
+   socket.on("new_message", async(mensaje) =>{   
+       chatParseado.push(mensaje);
+       io.sockets.emit("messages", 'chatMensajes.txt')
+       await fs.promises.writeFile("chatMensajes.txt", JSON.stringify('chatMensajes.txt'))
+       
+   })
+
 })
+
 
 //middleware. Interpreta json y formularios
  app.use(express.json())
@@ -94,32 +104,62 @@ app.use("/public", express.static("public"))
 
 
 app.get('/peliculas', async(req, res) => {
-   const peliculas = await contenedor.leer();
-   res.render('pages/list', {peliculas})
+   const traerProductos = async () => {
+      try{
+          const data = await contenedor.leer()
+          res.render('pages/list', {data:data}) 
+          
+          
+      }catch(error){
+          throw new Error(error)
+      }
+  };
+  traerProductos()
 })
-
-app.post('/peliculas', async(req,res) => {
-   const {body} = req;
-   await contenedor.guardar(body);
-   res.redirect('/');
+   
+app.post('/peliculas', async(req, res) => {
+   const agregarProducto = async() => {
+      try{
+          const objetoNuevo = req.body
+          console.log(objetoNuevo)
+          await contenedor.guardar(objetoNuevo)
+          res.redirect("/") 
+      }catch(error){
+          throw new Error(error)
+      }
+  }
+  agregarProducto()
 })
-
-app.get('/chat', async(req, res) => {
-   const chat = await contenedor.leer();
-   res.render('pages/list', {chat})
-})
-app.post('/chat', async(req, res) => {
-   const {body} = req;
-   await contenedor.guardar(body);
-   res.redirect('/');
-})
-
 
 
 app.get('/', (req,res) => {
-   res.render('pages/form', {})
+   const traerProductos = async () => {
+      try{
+          const data = await contenedor.leer()
+          res.render('pages/form', {data:data}) 
+          
+          
+      }catch(error){
+          throw new Error(error)
+      }
+  };
+  traerProductos()
+
 })
 
+app.get('/chat', async(req, res) => {
+   const traerChat = async () => {
+      try{
+          const data = await chat.leer()
+          res.render('pages/form', {data:data}) 
+          
+          
+      }catch(error){
+          throw new Error(error)
+      }
+  };
+  traerChat()
+})
 
 
  //LISTEN

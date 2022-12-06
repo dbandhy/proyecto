@@ -1,4 +1,38 @@
 const socket = io();
+const boton = document.getElementById("enviar")
+boton.addEventListener("click", ()=> {
+    const email = document.getElementById("email").value
+    const mensaje = document.getElementById("mensaje").value
+    const date = `${new Date().toLocaleDateString()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+    const objetoMensaje = {
+        email,
+        date ,
+        mensaje
+    }
+    socket.emit("new_message", objetoMensaje)
+})
+
+const crearEtiquetas =(mensajes) => {
+    const {email,date,mensaje} = mensajes
+    return `
+    <div>
+        <strong id="estilo">${email}</strong>
+        <strong id="fecha">[${date}] :</strong>
+        <em id="message">${mensaje}</em>
+    </div>`
+}
+
+const agregarMensaje= (mensajes) =>{
+    const mensajeFinal = mensajes.map(mensaje => crearEtiquetas(mensaje)).join("")
+    console.log(mensajeFinal) 
+    document.getElementById("chat").innerHTML= mensajeFinal
+}
+
+socket.on("messages", (messages) => agregarMensaje(messages))
+
+
+
+
         const btn = document.getElementById('btn-submit');
         const btnMensaje = document.getElementById('btn-submit-mensaje');
         
